@@ -1,3 +1,7 @@
+0.1.0
+-----
+- Squash commits
+
 0.0.4
 -----
 - Bug fix
