@@ -1,3 +1,7 @@
+0.1.1
+-----
+- Modify Javascript syntax
+
 0.1.0
 -----
 - Squash commits
