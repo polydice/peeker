@@ -1,50 +1,47 @@
-// Use localStorage to save peek status
-if (!localStorage.getItem("peek_status")){
-  localStorage.setItem("peek_status", "none");
-}
+(function () {
 
-// Add listener for window
-window.addEventListener("keydown", function(e){
-  peek_listener.queue = peek_listener.queue.concat(String.fromCharCode(e.keyCode));
-  peek_listener.compare();
-});
+  var peekElement = document.querySelector("#peek");
 
-// Listener Class
-var Listener = function(target, event_handler){
-  this.target = new RegExp(target, "i");
-  this.queue = new String("");
-  this.event_handler = event_handler;
+  // Check existence of peek element
+  if (!peekElement) {
+    return false;
+  } else {
+    // Listener Class
+    var Listener = function (target, eventHandler) {
+      this.target = new RegExp(target, "i");
+      this.queue = "";
+      this.eventHandler = eventHandler;
+      this.compare = function () {
+        if (this.queue.match(this.target)) {
+          this.queue = "";
+          this.eventHandler();
+        }
+      };
+    };
 
-  // Compare with target and queue
-  this.compare = function(){
-    if (this.queue.match(this.target)) {
-      this.refresh_queue();
-      this.event_handler();
+    // Target
+    var target = "peek";
+
+    // Handler
+    var handler = function () {
+      peekElement.style.display = (localStorage.getItem("peekStatus") == "none") ? "block" : "none";
+      localStorage.setItem("peekStatus", peekElement.style.display);
+    };
+
+    // Access peekStatus with localStorage
+    if (!localStorage.getItem("peekStatus")) {
+      localStorage.setItem("peekStatus", "none");
     }
+
+    // Give born a Listener object
+    var peekListener = new Listener(target, handler);
+    peekElement.style.display = localStorage.getItem("peekStatus");
+
+    // Add listener for window
+    window.addEventListener("keydown", function (e) {
+      peekListener.queue = peekListener.queue.concat(String.fromCharCode(e.keyCode));
+      peekListener.compare();
+    });
   }
 
-  // Refresh queue
-  this.refresh_queue = function(){
-    this.queue = new String("");
-  }
-};
-
-// Toggle toggle
-var peek_toggler = function(mode){
-  peek_element.style.display = (localStorage["peek_status"] == "none") ? "block" : "none";
-  localStorage["peek_status"] = peek.style.display;
-}
-
-// Initialize peek status with localStorage
-var peek_initialize = function(){
-  if (document.getElementById("peek")){
-    peek_element = document.getElementById("peek");
-    peek_element.style.display = localStorage.getItem("peek_status");
-  }else{
-    setTimeout(peek_initialize, 15);
-  }
-}
-
-var peek_element;
-var peek_listener = new Listener("peek", peek_toggler);
-peek_initialize();
+})();
