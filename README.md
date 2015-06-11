@@ -18,7 +18,7 @@ And then in `application.js`
 
 Finally, add this line to your `application.scss`
 
-`@import require peeker`
+`@import "peeker";`
 
 ## Usage
 
