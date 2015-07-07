@@ -1,0 +1,20 @@
+#peek {
+  .wrapper {
+    text-align: center;
+    width: 100% !important;
+
+    div {
+      display: inline-block;
+    }
+
+    .view {
+      float: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #peek {
+    display: none !important;
+  }
+}
