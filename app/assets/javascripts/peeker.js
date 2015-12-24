@@ -1,4 +1,4 @@
-(function () {
+(function (window, document, undefined) {
 
   // Find peek element
   var peekElement = document.querySelector("#peek");
@@ -43,4 +43,4 @@
     peekListener.compare();
   });
 
-})();
+})(window, document);
