@@ -4,9 +4,9 @@
   var peekElement = document.querySelector("#peek");
 
   // Check existence of peek element
-  if (!peekElement) 
+  if (!peekElement)
     return false;
-  
+
   // Listener Class
   var Listener = function (target, handler) {
     this.target = new RegExp(target, "i");
@@ -30,7 +30,7 @@
   };
 
   // Set peekStatus with localStorage
-  if (!localStorage.getItem("peekStatus")) 
+  if (!localStorage.getItem("peekStatus"))
     localStorage.setItem("peekStatus", "none");
 
   // Give born to a Listener object
