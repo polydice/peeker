@@ -2,10 +2,14 @@
 
   // Find peek element
   var peekElement = document.querySelector("#peek");
-
+  var socialPlugins = document.querySelectorAll(".social-plugin");
   // Check existence of peek element
   if (!peekElement)
     return false;
+
+  // Initialize social-plugin style with localStorage
+  var display = localStorage.getItem("peekStatus");
+  setSocialPluginStyleInBlogIndex(socialPlugins, display);
 
   // Listener Class
   var Listener = function (target, handler) {
@@ -25,7 +29,9 @@
 
   // Handler
   var handler = function () {
-    peekElement.style.display = (localStorage.getItem("peekStatus") == "none") ? "block" : "none";
+    var display = getPeekStatusFromLocalStorage();
+    peekElement.style.display = display;
+    setSocialPluginStyleInBlogIndex(socialPlugins, display);
     localStorage.setItem("peekStatus", peekElement.style.display);
   };
 
@@ -44,3 +50,16 @@
   });
 
 })(window, document);
+
+
+function setSocialPluginStyleInBlogIndex(socialPlugins, display) {
+  if (!!socialPlugins.length) {
+    for(var i = 0; i < socialPlugins.length; i++) {
+      socialPlugins[i].style.display = display;
+    }
+  }
+}
+
+function getPeekStatusFromLocalStorage() {
+  return (localStorage.getItem("peekStatus") == "none") ? "block" : "none";
+}
