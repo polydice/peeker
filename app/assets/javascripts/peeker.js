@@ -7,6 +7,9 @@
   if (!peekElement)
     return false;
 
+  // Build event
+  var event = new Event('peek');
+
   // Listener Class
   var Listener = function (target, handler) {
     this.target = new RegExp(target, "i");
@@ -27,6 +30,7 @@
   var handler = function () {
     peekElement.style.display = (localStorage.getItem("peekStatus") == "none") ? "block" : "none";
     localStorage.setItem("peekStatus", peekElement.style.display);
+    window.dispatchEvent(event);
   };
 
   // Set peekStatus with localStorage
