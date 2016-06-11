@@ -8,7 +8,8 @@
     return false;
 
   // Build event
-  var event = new Event('peek');
+  var event = document.createEvent('Event');
+  event.initEvent('peek', true, true);
 
   // Listener Class
   var Listener = function (target, handler) {
